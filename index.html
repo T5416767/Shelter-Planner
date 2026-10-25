@@ -2,62 +2,46 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>防災識安所：避難所規劃</title>
   <style>
-    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #1F3A6B; touch-action: none; }
-    #unity-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; display: block; background: #BFD6EE; }
-    #loading { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
-               color: #fff; font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif; }
-    #loading .t { font-size: 22px; font-weight: 700; letter-spacing: .1em; }
-    #loading .bar { width: min(320px, 70vw); height: 10px; border-radius: 6px; background: rgba(255,255,255,.25); overflow: hidden; }
-    #loading .fill { height: 100%; width: 0; background: #F6B23C; border-radius: 6px; transition: width .2s; }
-    #loading .hint { font-size: 14px; opacity: .8; }
-    #error { position: fixed; left: 50%; top: 20px; transform: translateX(-50%); background: #D64545; color: #fff; padding: 10px 16px;
-             border-radius: 10px; font-family: sans-serif; display: none; z-index: 9; max-width: 90vw; }
+    :root { --navy: #1F3A6B; --navy-dark: #152A50; --yellow: #F6B23C; --bg: #F4F6FB; --sub: #5D6678; --line: #DCE2EE; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background: linear-gradient(160deg, #DCE8F7 0%, var(--bg) 55%, #E3F1E4 100%);
+      font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+      color: var(--navy); display: flex; align-items: center; justify-content: center; padding: 16px;
+    }
+    .card {
+      width: min(560px, 100%); background: #fff; border-radius: 22px; padding: 40px 36px 32px;
+      box-shadow: 0 10px 30px rgba(31, 58, 107, .14); text-align: center;
+    }
+    h1 { margin: 0; font-size: clamp(30px, 7vw, 46px); letter-spacing: .06em; }
+    .sub { margin: 6px 0 0; font-size: clamp(18px, 4.5vw, 24px); font-weight: 700; }
+    .bar { width: 120px; height: 5px; background: var(--yellow); border-radius: 3px; margin: 16px auto 22px; }
+    .desc { margin: 0 0 26px; color: var(--sub); font-size: 16px; line-height: 1.7; }
+    a.btn {
+      display: block; text-decoration: none; border-radius: 14px; padding: 16px 18px; margin-top: 12px;
+      font-size: 20px; font-weight: 700; transition: transform .1s, filter .1s;
+    }
+    a.btn:hover { filter: brightness(.96); transform: translateY(-1px); }
+    a.primary { background: var(--yellow); color: var(--navy); }
+    a.secondary { background: var(--bg); color: var(--navy); border: 1px solid var(--line); }
+    .small { display: block; font-size: 14px; font-weight: 400; color: var(--sub); margin-top: 4px; }
+    a.primary .small { color: var(--navy-dark); opacity: .8; }
+    .note { margin-top: 22px; color: var(--sub); font-size: 14px; line-height: 1.6; }
   </style>
 </head>
 <body>
-  <canvas id="unity-canvas" tabindex="-1"></canvas>
-  <div id="loading">
-    <div class="t">防災識安所：避難所規劃</div>
-    <div class="bar"><div class="fill" id="fill"></div></div>
-    <div class="hint">載入中…手機請橫向使用</div>
-  </div>
-  <div id="error"></div>
-  <script>
-    // 全畫面自適應：畫布永遠填滿瀏覽器視窗，手機、平板、電腦皆適用
-    var canvas = document.querySelector("#unity-canvas");
-    var config = {
-      dataUrl: "Build/WebGL.data.unityweb",
-      frameworkUrl: "Build/WebGL.framework.js.unityweb",
-      codeUrl: "Build/WebGL.wasm.unityweb",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "防災識安所",
-      productName: "防災識安所：避難所規劃",
-      productVersion: "1.0",
-      matchWebGLToCanvasSize: true,
-      showBanner: function (msg, type) {
-        if (type === "error") { var e = document.getElementById("error"); e.textContent = msg; e.style.display = "block"; }
-      },
-    };
-    // 高解析度手機上限制像素比，避免畫面過重
-    config.devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-
-    var script = document.createElement("script");
-    script.src = "Build/WebGL.loader.js";
-    script.onload = function () {
-      createUnityInstance(canvas, config, function (p) {
-        document.getElementById("fill").style.width = (100 * p) + "%";
-      }).then(function () {
-        document.getElementById("loading").style.display = "none";
-      }).catch(function (message) {
-        var e = document.getElementById("error"); e.textContent = message; e.style.display = "block";
-      });
-    };
-    document.body.appendChild(script);
-  </script>
+  <main class="card">
+    <h1>防災識安所</h1>
+    <p class="sub">避難所規劃</p>
+    <div class="bar"></div>
+    <p class="desc">在學校體育館規劃一座避難所，<br>觀察居民的行動，找出問題並改善。</p>
+    <a class="btn primary" href="v2.0/">開始體驗（最新版 2.0）<span class="small">2026/10/26</span></a>
+    <a class="btn secondary" href="v1.1.0/">舊版 1.1.0<span class="small">2026/10/17</span></a>
+    <p class="note">建議使用電腦，或將手機、平板橫向使用。<br>第一次載入需要一點時間，請耐心等候。</p>
+  </main>
 </body>
 </html>
