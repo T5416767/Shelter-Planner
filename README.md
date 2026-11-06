@@ -40,7 +40,7 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hant
 台灣政府資料開放授權條款第 1 版：https://data.gov.tw/license
 日本政府標準利用規約 2.0（內閣府）：https://www.cao.go.jp/notice/rule.html
 
-## 從1.1.0到2.0.0的更新與修正項目
+## 從1.1.0到2.0的更新與修正項目
 - 新手教學變成初次不可跳過
 - 修正新手教學裡的帳篷提示問題
 - 調整新手教學文字量
